@@ -10,58 +10,73 @@
   <header class="topbar">
     <div class="wrap">
       <h1>Internet, Cloud & Data Transmission</h1>
-      <p class="subtitle">Click buttons to show information + run simple simulations.</p>
+      <p class="subtitle">Interactive info + a mini game (packet journey) + error checking demo.</p>
       <div class="headerActions">
+        <nav class="nav">
+          <button class="btn btnLight" type="button" data-scroll="#internetBox">Internet</button>
+          <button class="btn btnLight" type="button" data-scroll="#cloudBox">Cloud</button>
+          <button class="btn btnLight" type="button" data-scroll="#dataBox">Transmission</button>
+          <button class="btn btnLight" type="button" data-scroll="#gameBox">Mini Game</button>
+        </nav>
         <button class="btn" id="themeBtn" type="button">Toggle Theme</button>
       </div>
     </div>
   </header>
 
   <main class="wrap">
-    <section class="card">
+    <section class="card" id="internetBox">
       <div class="cardHead">
         <h2>Internet Technologies</h2>
-        <span class="tag">DNS + Packet Journey</span>
+        <span class="tag">DNS + Routers + HTTP</span>
       </div>
 
       <div class="infoBtns">
-        <button class="btn btnLight" id="dnsInfoBtn" type="button">What is DNS?</button>
-        <button class="btn btnLight" id="packetInfoBtn" type="button">How a Packet Travels</button>
-        <button class="btn btnLight" id="httpInfoBtn" type="button">What is HTTP?</button>
+        <button class="btn btnLight" id="dnsInfoBtn" type="button">DNS</button>
+        <button class="btn btnLight" id="packetInfoBtn" type="button">Packet Journey</button>
+        <button class="btn btnLight" id="httpInfoBtn" type="button">HTTP/HTTPS</button>
+        <button class="btn btnLight" id="routerInfoBtn" type="button">Routers</button>
       </div>
 
       <p class="output" id="internetInfoOut">Press a button to show info here.</p>
 
-      <label for="urlInput">DNS lookup (simulated)</label>
-      <input id="urlInput" type="text" placeholder="example.com" />
-      <div class="rowBtns">
-        <button class="btn" id="dnsBtn" type="button">Find IP</button>
-        <button class="btn btnLight" id="journeyBtn" type="button">Show Journey (Alert)</button>
-      </div>
-      <p class="output" id="dnsOutput">Result will appear here.</p>
+      <div class="miniGrid">
+        <div>
+          <label for="urlInput">DNS lookup (simulated)</label>
+          <input id="urlInput" type="text" placeholder="example.com" />
+          <div class="rowBtns">
+            <button class="btn" id="dnsBtn" type="button">Find IP</button>
+            <button class="btn btnLight" id="journeyBtn" type="button">Show Journey Steps</button>
+          </div>
+          <p class="output" id="dnsOutput">Result will appear here.</p>
+          <ul id="journeySteps" class="cleanList"></ul>
+        </div>
 
-      <div class="diagram">
-        <div class="node">Browser</div>
-        <div class="arrow">→</div>
-        <div class="node">DNS</div>
-        <div class="arrow">→</div>
-        <div class="node">Routers</div>
-        <div class="arrow">→</div>
-        <div class="node">Server</div>
+        <div class="diagram">
+          <div class="node">Browser</div>
+          <div class="arrow">→</div>
+          <div class="node">DNS</div>
+          <div class="arrow">→</div>
+          <div class="node">Router(s)</div>
+          <div class="arrow">→</div>
+          <div class="node">Server</div>
+          <div class="arrow">→</div>
+          <div class="node">Browser</div>
+        </div>
       </div>
     </section>
 
-    <section class="card">
+    <section class="card" id="cloudBox">
       <div class="cardHead">
         <h2>Cloud Computing & Web Apps</h2>
-        <span class="tag">Client vs Server</span>
+        <span class="tag">Client vs Server + Storage</span>
       </div>
 
       <div class="infoBtns">
-        <button class="btn btnLight" id="cloudInfoBtn" type="button">What is Cloud?</button>
+        <button class="btn btnLight" id="cloudInfoBtn" type="button">Cloud</button>
         <button class="btn btnLight" id="clientInfoBtn" type="button">Client-side</button>
         <button class="btn btnLight" id="serverInfoBtn" type="button">Server-side</button>
-        <button class="btn btnLight" id="cloudVsLocalBtn" type="button">Cloud vs Traditional Storage</button>
+        <button class="btn btnLight" id="cloudVsLocalBtn" type="button">Cloud vs Traditional</button>
+        <button class="btn btnLight" id="broadbandInfoBtn" type="button">Broadband</button>
       </div>
 
       <p class="output" id="cloudInfoOut">Press a button to show info here.</p>
@@ -69,22 +84,35 @@
       <div class="twoCol">
         <div class="pill">
           <h3>Client-side Example</h3>
-          <button class="btn" id="clientBtn" type="button">Run Client Example</button>
+          <button class="btn" id="clientBtn" type="button">Run</button>
           <p class="output" id="clientOutput">Click to update text.</p>
         </div>
 
         <div class="pill">
           <h3>Server-side Example (Simulated)</h3>
-          <button class="btn" id="serverBtn" type="button">Run Server Example</button>
+          <button class="btn" id="serverBtn" type="button">Run</button>
           <p class="output" id="serverOutput">Click to simulate a server reply.</p>
         </div>
       </div>
+
+      <div class="pill" style="margin-top:14px;">
+        <h3>Cloud Storage Simulation (local save)</h3>
+        <p class="note">This saves to your browser so it stays after refresh (simple “storage” idea).</p>
+        <label for="noteInput">Save a note</label>
+        <input id="noteInput" type="text" placeholder="Type a short note..." maxlength="80" />
+        <div class="rowBtns">
+          <button class="btn btnLight" id="saveNoteBtn" type="button">Save</button>
+          <button class="btn btnLight" id="loadNoteBtn" type="button">Load</button>
+          <button class="btn btnDanger" id="clearNoteBtn" type="button">Delete</button>
+        </div>
+        <p class="output" id="noteOutput">Your saved note will show here.</p>
+      </div>
     </section>
 
-    <section class="card">
+    <section class="card" id="dataBox">
       <div class="cardHead">
         <h2>Data Transmission & Error Checking</h2>
-        <span class="tag">USB vs Broadband + Check</span>
+        <span class="tag">Modes + USB vs Broadband + Check</span>
       </div>
 
       <div class="infoBtns">
@@ -141,7 +169,33 @@
       </div>
     </section>
 
-    <section class="card">
+    <section class="card" id="gameBox">
+      <div class="cardHead">
+        <h2>Mini Game: Build the Packet Journey</h2>
+        <span class="tag">Put steps in the right order</span>
+      </div>
+
+      <p class="note">Click the steps in the correct order. If you make a mistake, it resets.</p>
+
+      <div class="gameRow">
+        <div class="gameCol">
+          <h3>Steps</h3>
+          <div class="chips" id="chips"></div>
+          <div class="rowBtns">
+            <button class="btn btnLight" id="shuffleGameBtn" type="button">Shuffle</button>
+            <button class="btn btnDanger" id="resetGameBtn" type="button">Reset</button>
+          </div>
+        </div>
+
+        <div class="gameCol">
+          <h3>Your Order</h3>
+          <ol class="orderBox" id="orderBox"></ol>
+          <p class="output" id="gameOut">Score: 0</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="refsBox">
       <div class="cardHead">
         <h2>References</h2>
         <span class="tag">Reliable sources</span>
