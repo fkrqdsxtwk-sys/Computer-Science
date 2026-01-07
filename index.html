@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Internet, Cloud & Data Transmission</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <h1>Internet, Cloud & Data Transmission</h1>
+      <p class="subtitle">Click buttons to show information + run simple simulations.</p>
+      <div class="headerActions">
+        <button class="btn" id="themeBtn" type="button">Toggle Theme</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card">
+      <div class="cardHead">
+        <h2>Internet Technologies</h2>
+        <span class="tag">DNS + Packet Journey</span>
+      </div>
+
+      <div class="infoBtns">
+        <button class="btn btnLight" id="dnsInfoBtn" type="button">What is DNS?</button>
+        <button class="btn btnLight" id="packetInfoBtn" type="button">How a Packet Travels</button>
+        <button class="btn btnLight" id="httpInfoBtn" type="button">What is HTTP?</button>
+      </div>
+
+      <p class="output" id="internetInfoOut">Press a button to show info here.</p>
+
+      <label for="urlInput">DNS lookup (simulated)</label>
+      <input id="urlInput" type="text" placeholder="example.com" />
+      <div class="rowBtns">
+        <button class="btn" id="dnsBtn" type="button">Find IP</button>
+        <button class="btn btnLight" id="journeyBtn" type="button">Show Journey (Alert)</button>
+      </div>
+      <p class="output" id="dnsOutput">Result will appear here.</p>
+
+      <div class="diagram">
+        <div class="node">Browser</div>
+        <div class="arrow">→</div>
+        <div class="node">DNS</div>
+        <div class="arrow">→</div>
+        <div class="node">Routers</div>
+        <div class="arrow">→</div>
+        <div class="node">Server</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="cardHead">
+        <h2>Cloud Computing & Web Apps</h2>
+        <span class="tag">Client vs Server</span>
+      </div>
+
+      <div class="infoBtns">
+        <button class="btn btnLight" id="cloudInfoBtn" type="button">What is Cloud?</button>
+        <button class="btn btnLight" id="clientInfoBtn" type="button">Client-side</button>
+        <button class="btn btnLight" id="serverInfoBtn" type="button">Server-side</button>
+        <button class="btn btnLight" id="cloudVsLocalBtn" type="button">Cloud vs Traditional Storage</button>
+      </div>
+
+      <p class="output" id="cloudInfoOut">Press a button to show info here.</p>
+
+      <div class="twoCol">
+        <div class="pill">
+          <h3>Client-side Example</h3>
+          <button class="btn" id="clientBtn" type="button">Run Client Example</button>
+          <p class="output" id="clientOutput">Click to update text.</p>
+        </div>
+
+        <div class="pill">
+          <h3>Server-side Example (Simulated)</h3>
+          <button class="btn" id="serverBtn" type="button">Run Server Example</button>
+          <p class="output" id="serverOutput">Click to simulate a server reply.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="cardHead">
+        <h2>Data Transmission & Error Checking</h2>
+        <span class="tag">USB vs Broadband + Check</span>
+      </div>
+
+      <div class="infoBtns">
+        <button class="btn btnLight" id="simplexBtn" type="button">Simplex</button>
+        <button class="btn btnLight" id="halfBtn" type="button">Half-Duplex</button>
+        <button class="btn btnLight" id="fullBtn" type="button">Full-Duplex</button>
+        <button class="btn btnLight" id="errorCheckInfoBtn" type="button">Error Checking</button>
+      </div>
+
+      <p class="output" id="transInfoOut">Press a button to show info here.</p>
+
+      <h3>USB vs Broadband</h3>
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Technology</th>
+              <th>What it is</th>
+              <th>Typical Speed</th>
+              <th>Used for</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>USB</strong></td>
+              <td>Wired data transfer between devices</td>
+              <td>~480 Mbps (USB 2.0) to several Gbps (newer USB)</td>
+              <td>Copy files, connect devices</td>
+            </tr>
+            <tr>
+              <td><strong>Broadband</strong></td>
+              <td>Internet connection (fiber/cable/5G)</td>
+              <td>~25–1000+ Mbps depending on provider/type</td>
+              <td>Web, streaming, cloud apps</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Error Checking Demo</h3>
+      <label for="messageInput">Message</label>
+      <input id="messageInput" type="text" placeholder="Type a message" maxlength="80" />
+      <div class="rowBtns">
+        <button class="btn" id="sendBtn" type="button">Send</button>
+        <button class="btn btnLight" id="tamperBtn" type="button">Tamper</button>
+        <button class="btn btnDanger" id="clearBtn" type="button">Clear</button>
+      </div>
+
+      <p class="output" id="sendOutput">Status will appear here.</p>
+
+      <div class="logBox">
+        <h4>Log</h4>
+        <ul id="logList" class="logList"></ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="cardHead">
+        <h2>References</h2>
+        <span class="tag">Reliable sources</span>
+      </div>
+      <ul class="cleanList">
+        <li><a href="https://developer.mozilla.org/en-US/docs/Glossary/DNS" target="_blank" rel="noopener">MDN: DNS</a></li>
+        <li><a href="https://www.cloudflare.com/learning/dns/what-is-dns/" target="_blank" rel="noopener">Cloudflare: What is DNS?</a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview" target="_blank" rel="noopener">MDN: HTTP Overview</a></li>
+        <li><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site" target="_blank" rel="noopener">GitHub Pages</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
