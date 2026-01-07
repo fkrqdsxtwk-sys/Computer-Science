@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const themeBtn = byId("themeBtn");
+
   const internetInfoOut = byId("internetInfoOut");
   const dnsInfoBtn = byId("dnsInfoBtn");
   const packetInfoBtn = byId("packetInfoBtn");
@@ -66,77 +67,123 @@ document.addEventListener("DOMContentLoaded", () => {
 
   themeBtn.addEventListener("click", () => document.body.classList.toggle("dark"));
 
+  function setHTML(outEl, html) {
+    outEl.innerHTML = html;
+  }
+
   dnsInfoBtn.addEventListener("click", () => {
-    internetInfoOut.textContent =
-      "DNS changes a website name (URL) into an IP address so your device can find the correct server.";
-  });
-
-  packetInfoBtn.addEventListener("click", () => {
-    internetInfoOut.textContent =
-      "Data is split into packets. Packets travel from your browser to the server and then back again to your browser.";
-  });
-
-  httpInfoBtn.addEventListener("click", () => {
-    internetInfoOut.textContent =
-      "HTTP/HTTPS are rules for web communication. Your browser requests a page and the server sends it back.";
+    setHTML(internetInfoOut,
+      "<strong>DNS (Domain Name System)</strong> is how the internet turns a website name into a number address called an <strong>IP address</strong>. " +
+      "Humans remember names like <strong>example.com</strong>, but computers need IP addresses to connect to the right server. " +
+      "When you type a URL, your device asks a DNS server: “What IP matches this name?” The DNS server replies with the IP address, " +
+      "and then your browser can send the request to the correct server. Without DNS, you would need to type long IP numbers instead of names."
+    );
   });
 
   routerInfoBtn.addEventListener("click", () => {
-    internetInfoOut.textContent =
-      "Routers move packets between networks. Packets may pass through many routers before reaching the server.";
+    setHTML(internetInfoOut,
+      "<strong>Routers</strong> move data between networks. Your home or school router is the first router your device usually talks to. " +
+      "After that, your data travels through many other routers owned by internet providers. Each router decides the next best path to send the packet " +
+      "until it reaches the server. If one path is busy or broken, routers can send traffic a different way. This is why the internet still works even when " +
+      "some links fail."
+    );
+  });
+
+  httpInfoBtn.addEventListener("click", () => {
+    setHTML(internetInfoOut,
+      "<strong>HTTP</strong> is a set of rules for web communication. Your browser uses HTTP to request a page (for example: “GET the homepage”), " +
+      "and the server replies with data (HTML, images, etc.). <strong>HTTPS</strong> is HTTP with encryption, which helps protect privacy and security. " +
+      "That means other people on the network cannot easily read or change the data while it is traveling."
+    );
+  });
+
+  packetInfoBtn.addEventListener("click", () => {
+    setHTML(internetInfoOut,
+      "<strong>Packets</strong> are small pieces of data sent across the internet. Big data is split into packets so it can travel faster and more reliably. " +
+      "Each packet can take a different route through routers, and they are put back together at the end. " +
+      "If a packet is lost, the system can request it again. This helps webpages load even when the network is not perfect."
+    );
   });
 
   dnsBtn.addEventListener("click", () => {
     const url = (urlInput.value || "").trim().toLowerCase();
-    if (!url) { dnsOutput.textContent = "Type a URL first."; return; }
+    if (!url) {
+      dnsOutput.textContent = "Type a URL first.";
+      return;
+    }
     const ip = dnsMap[url] || ("192.0.2." + (Math.floor(Math.random() * 200) + 10));
     dnsOutput.textContent = `${url} → ${ip}`;
   });
 
   journeyBtn.addEventListener("click", () => {
     const steps = [
-      "1) You type a URL in the browser.",
-      "2) Browser asks DNS for the IP address.",
-      "3) Packets go to your local router.",
-      "4) Packets travel through many routers on the internet.",
-      "5) Server receives the request and sends data back.",
-      "6) Browser rebuilds the page and shows it."
+      "1) You type a URL in the browser and press enter.",
+      "2) The browser asks a DNS server for the IP address of the website.",
+      "3) Your device sends packets to your local router (home/school).",
+      "4) Routers forward packets across the internet through many networks.",
+      "5) The web server receives the request and processes it.",
+      "6) The server sends response packets back to your device.",
+      "7) Your browser puts the packets together and shows the webpage."
     ];
     journeySteps.innerHTML = steps.map(s => `<li>${s}</li>`).join("");
   });
 
   cloudInfoBtn.addEventListener("click", () => {
-    cloudInfoOut.textContent =
-      "Cloud computing means using servers on the internet to store data and run services that users can access from anywhere.";
+    setHTML(cloudInfoOut,
+      "<strong>Cloud computing</strong> means using powerful computers (servers) on the internet to store data and run services. " +
+      "Instead of saving everything only on your own device, the cloud lets you access your work from different devices using a login and the internet. " +
+      "Examples include online storage, online documents, and websites hosted on cloud servers. " +
+      "Cloud is useful because it can handle many users at once and it can scale up when demand increases."
+    );
   });
 
   clientInfoBtn.addEventListener("click", () => {
-    cloudInfoOut.textContent =
-      "Client-side happens in your browser (HTML, CSS, JavaScript). It controls what you see and how the page reacts.";
+    setHTML(cloudInfoOut,
+      "<strong>Client-side</strong> means the part that runs on the user’s device (the browser). " +
+      "HTML builds the structure (headings, sections, buttons). CSS controls the design (colors, boxes, layout). " +
+      "JavaScript controls interaction (when you click a button, the page changes). " +
+      "Client-side is responsible for what the user sees and how the page reacts."
+    );
   });
 
   serverInfoBtn.addEventListener("click", () => {
-    cloudInfoOut.textContent =
-      "Server-side happens on a server. Servers store data and send results to users. Hosting a website online is server-side.";
+    setHTML(cloudInfoOut,
+      "<strong>Server-side</strong> means the part that runs on a server, not on the user’s device. " +
+      "Servers store data (databases, files) and send information back to users. " +
+      "When a website is hosted online (for example GitHub Pages), the website files are stored on remote servers. " +
+      "This is server-side hosting because anyone can access the site through a URL, even if your own laptop is turned off."
+    );
   });
 
   cloudVsLocalBtn.addEventListener("click", () => {
-    cloudInfoOut.textContent =
-      "Cloud storage is on remote servers and is easy to access from different devices. Traditional storage is on your own device (hard drive/USB) and is not automatically shared.";
+    setHTML(cloudInfoOut,
+      "<strong>Cloud storage vs Traditional storage</strong><br><br>" +
+      "<strong>Traditional storage</strong> means saving files on your own device (hard drive, USB). It can work offline, but sharing is manual and a device can be lost or broken.<br>" +
+      "<strong>Cloud storage</strong> means saving files on remote servers. It is easier to access from anywhere and easier to share, but it needs internet and good security settings.<br><br>" +
+      "In real life, many people use both: local storage for quick access, and cloud storage for backup and sharing."
+    );
   });
 
   broadbandInfoBtn.addEventListener("click", () => {
-    cloudInfoOut.textContent =
-      "Broadband is a fast internet connection. Examples: fiber (fast/stable), cable (shared speeds), and 5G (wireless mobile internet).";
+    setHTML(cloudInfoOut,
+      "<strong>Broadband</strong> is a fast internet connection that is always available. Common types include:<br><br>" +
+      "• <strong>Fiber</strong>: uses light in cables, usually very fast and stable.<br>" +
+      "• <strong>Cable</strong>: uses TV cables, speeds can change when many people are online.<br>" +
+      "• <strong>DSL</strong>: uses phone lines, usually slower than fiber.<br>" +
+      "• <strong>5G</strong>: wireless mobile internet, speed depends on signal and location.<br><br>" +
+      "Broadband matters because cloud apps, streaming, and online gaming need reliable speed."
+    );
   });
 
   clientBtn.addEventListener("click", () => {
-    clientOutput.textContent = `Client-side update: ${new Date().toLocaleTimeString()}`;
+    const now = new Date().toLocaleTimeString();
+    clientOutput.textContent = `Client-side: the browser updated this text at ${now}.`;
   });
 
   serverBtn.addEventListener("click", () => {
-    const data = { status: "OK", time: new Date().toLocaleTimeString() };
-    serverOutput.textContent = `Server reply (simulated): ${data.status} at ${data.time}`;
+    const t = new Date().toLocaleTimeString();
+    const fake = { status: "OK", time: t, place: "Cloud server" };
+    serverOutput.textContent = `${fake.place} reply: status=${fake.status}, time=${fake.time}`;
   });
 
   const NOTE_KEY = "site_note";
@@ -159,23 +206,39 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   simplexBtn.addEventListener("click", () => {
-    transInfoOut.textContent =
-      "Simplex is one-way only. Example: TV broadcast sends to you.";
+    setHTML(transInfoOut,
+      "<strong>Simplex</strong> means data travels in only one direction. " +
+      "A device sends and the other device only receives. " +
+      "Example: a TV broadcast sends a signal to your TV, but your TV does not send back on the same channel. " +
+      "Simplex is good when you only need one-way communication."
+    );
   });
 
   halfBtn.addEventListener("click", () => {
-    transInfoOut.textContent =
-      "Half-duplex is two-way, but not at the same time. Example: walkie-talkies.";
+    setHTML(transInfoOut,
+      "<strong>Half-duplex</strong> means data can travel both ways, but not at the same time. " +
+      "One side sends, then the other side sends. " +
+      "Example: walkie-talkies — one person talks while the other listens, then they switch. " +
+      "Half-duplex saves resources but can be slower for conversations."
+    );
   });
 
   fullBtn.addEventListener("click", () => {
-    transInfoOut.textContent =
-      "Full-duplex is two-way at the same time. Example: phone calls and most internet use.";
+    setHTML(transInfoOut,
+      "<strong>Full-duplex</strong> means data travels both ways at the same time. " +
+      "This is how phone calls work: you can talk and listen at the same time. " +
+      "Most internet communication is full-duplex because the browser is sending requests while receiving responses. " +
+      "Full-duplex is best for fast two-way communication."
+    );
   });
 
   errorCheckInfoBtn.addEventListener("click", () => {
-    transInfoOut.textContent =
-      "Error checking uses a check value. Sender and receiver compare check values. If they don’t match, an error is detected.";
+    setHTML(transInfoOut,
+      "<strong>Error checking</strong> protects <strong>data integrity</strong> (keeping data correct). " +
+      "The sender adds a check value that represents the message. The receiver calculates the check value again. " +
+      "If both match, the data is likely correct. If they do not match, the receiver knows something changed during transfer. " +
+      "Real networks use stronger methods like CRC, but this demo shows the idea clearly."
+    );
   });
 
   function checksum(message) {
@@ -197,16 +260,20 @@ document.addEventListener("DOMContentLoaded", () => {
   sendBtn.addEventListener("click", () => {
     const msg = (messageInput.value || "").trim();
     if (!msg) { sendOutput.textContent = "Type a message first."; return; }
+
     const check = checksum(msg);
     lastPacket = { msg, check };
+
     sendOutput.textContent = `Sent "${msg}" | check=${check} | received OK`;
     addLog(`Sent "${msg}" (check=${check}) → OK`);
   });
 
   tamperBtn.addEventListener("click", () => {
     if (!lastPacket) { sendOutput.textContent = "Send a message first."; return; }
+
     const tampered = lastPacket.msg + "!";
     const newCheck = checksum(tampered);
+
     if (newCheck !== lastPacket.check) {
       alert("ERROR: Data changed during transfer (check mismatch).");
       sendOutput.textContent = `ERROR detected | expected ${lastPacket.check}, got ${newCheck}`;
@@ -235,74 +302,59 @@ document.addEventListener("DOMContentLoaded", () => {
   let chosen = [];
   let score = 0;
 
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
   function renderGame() {
     chips.innerHTML = "";
     orderBox.innerHTML = "";
-    correctOrderShuffled().forEach(label => {
-      const btn = document.createElement("div");
-      btn.className = "chip";
-      btn.textContent = label;
-      btn.addEventListener("click", () => pickStep(label, btn));
-      chips.appendChild(btn);
+    chosen = [];
+    shuffle(correctOrder).forEach(label => {
+      const chip = document.createElement("div");
+      chip.className = "chip";
+      chip.textContent = label;
+      chip.addEventListener("click", () => pick(label, chip));
+      chips.appendChild(chip);
     });
-    updateGameOut();
+    gameOut.textContent = `Score: ${score}`;
   }
 
-  function correctOrderShuffled() {
-    const arr = correctOrder.slice();
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-  }
-
-  function pickStep(label, el) {
-    if (el.dataset.used === "1") return;
-
+  function pick(label, chip) {
     const expected = correctOrder[chosen.length];
     if (label !== expected) {
       chosen = [];
-      score = Math.max(0, score - 1);
       orderBox.innerHTML = "";
-      document.querySelectorAll(".chip").forEach(c => c.dataset.used = "0");
-      updateGameOut("Wrong order — reset.");
+      score = Math.max(0, score - 1);
+      gameOut.textContent = `Score: ${score} — Wrong order, try again.`;
       return;
     }
 
-    el.dataset.used = "1";
     chosen.push(label);
-
     const li = document.createElement("li");
     li.textContent = label;
     orderBox.appendChild(li);
 
     if (chosen.length === correctOrder.length) {
       score += 2;
-      updateGameOut("Perfect! +2 points.");
-      chosen = [];
-      setTimeout(() => {
-        orderBox.innerHTML = "";
-        renderGame();
-      }, 700);
-      return;
+      gameOut.textContent = `Score: ${score} — Perfect! You built the full packet journey.`;
+      setTimeout(renderGame, 900);
+    } else {
+      gameOut.textContent = `Score: ${score}`;
     }
-
-    updateGameOut();
   }
 
-  function updateGameOut(extra) {
-    gameOut.textContent = extra ? `Score: ${score} — ${extra}` : `Score: ${score}`;
-  }
-
-  shuffleGameBtn.addEventListener("click", () => renderGame());
+  shuffleGameBtn.addEventListener("click", renderGame);
 
   resetGameBtn.addEventListener("click", () => {
-    chosen = [];
     score = 0;
-    orderBox.innerHTML = "";
     renderGame();
-    updateGameOut("Reset.");
+    gameOut.textContent = `Score: ${score} — Reset.`;
   });
 
   renderGame();
